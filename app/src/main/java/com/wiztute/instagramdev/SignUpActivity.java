@@ -1,5 +1,6 @@
 package com.wiztute.instagramdev;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SignUpActivity extends AppCompatActivity {
 
     //Defining the variable
-    EditText emailEntryField, passwordEntryField;
+    EditText emailEntryField;
+    EditText passwordEntryField;
     Button signUpButton;
-    String email,password;
+    String email;
+    String password;
     Toast allowToast, denyToast;
+    Intent dashboardIntent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +33,8 @@ public class SignUpActivity extends AppCompatActivity {
         passwordEntryField = (EditText)findViewById(R.id.password_field);
         signUpButton = (Button)findViewById(R.id.signin_button);
         allowToast = Toast.makeText(getApplicationContext(),"You have been successfully logged in!!!",Toast.LENGTH_LONG);
-        denyToast = Toast.makeText(getApplicationContext(),"You have are not allowed.",Toast.LENGTH_LONG);
+        denyToast = Toast.makeText(getApplicationContext(),"You are not allowed to login.",Toast.LENGTH_LONG);
+        dashboardIntent = new Intent(SignUpActivity.this, DashboardActivity.class);
 
         //Way of defining a click: Same for all widget
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +51,9 @@ public class SignUpActivity extends AppCompatActivity {
                 //When working with a string, using the equals
                 if( email.equals("akash@wiztute.com" ) ){
                     allowToast.show();
+
+                    //Where I navigate to the dashboard activity
+                    startActivity(dashboardIntent);
                 }else{
                     denyToast.show();
                 }
